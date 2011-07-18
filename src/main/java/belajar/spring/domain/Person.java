@@ -6,6 +6,14 @@ public class Person {
 	private Integer id;
 	private String nama;
 	private Date tanggalLahir;
+	private Address alamat;
+	
+	public Address getAlamat() {
+		return alamat;
+	}
+	public void setAlamat(Address alamat) {
+		this.alamat = alamat;
+	}
 	public Integer getId() {
 		return id;
 	}
