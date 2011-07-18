@@ -1,11 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <beans xmlns="http://www.springframework.org/schema/beans"
-       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-       xsi:schemaLocation="http://www.springframework.org/schema/beans
-           http://www.springframework.org/schema/beans/spring-beans-3.0.xsd">
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans
+	http://www.springframework.org/schema/beans/spring-beans-3.0.xsd">
 	
 	<bean id="endy" class="belajar.spring.domain.Person">
+		<property name="id" value="10"></property>
 		<property name="nama" value="Endy Muhardin"></property>
+		<property name="tanggalLahir" value="1945-08-17"></property>
 		<property name="alamat" ref="bogor"></property>
 	</bean>
 	
@@ -13,6 +15,26 @@
 		<property name="jalan" value="Jl. Tegar Beriman"></property>
 		<property name="kota" value="Bogor"></property>
 		<property name="kodepos" value="40000"></property>
+	</bean>
+	
+	<!-- property editor untuk mengkonversi java.util.Date -->
+	<bean id="dateEditor" 
+		class="org.springframework.beans.propertyeditors.CustomDateEditor">
+		<constructor-arg>
+			<bean class="java.text.SimpleDateFormat">
+				<constructor-arg value="yyyy-MM-dd"></constructor-arg>
+			</bean>
+		</constructor-arg>
+		<constructor-arg value="true"></constructor-arg>
+	</bean>
+	
+	<!-- register dateEditor ke tipe data java.util.Date -->
+	<bean class="org.springframework.beans.factory.config.CustomEditorConfigurer">
+		<property name="customEditors">
+			<map>
+				<entry key="java.util.Date" value-ref="dateEditor"></entry>
+			</map>
+		</property>
 	</bean>
 	
 </beans>

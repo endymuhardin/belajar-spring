@@ -17,7 +17,9 @@ public class DemoSpring {
 		Person p = (Person) ctx.getBean("endy");
 		
 		// tampilkan
+		System.out.println("ID : "+p.getId());
 		System.out.println("Nama : "+p.getNama());
+		System.out.println("Tanggal Lahir : "+p.getTanggalLahir());
 		System.out.println("Alamat : "+p.getAlamat().getJalan());
 	}
 
