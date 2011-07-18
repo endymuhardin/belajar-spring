@@ -18,6 +18,11 @@
 	</bean>
 	
 	<!-- property editor untuk mengkonversi java.util.Date -->
+	<!-- 
+	padanan kode Java : 
+	CustomDateEditor dateEditor 
+	= new CustomDateEditor(new SimpleDateFormat("yyyy-MM-dd"), true);
+	-->
 	<bean id="dateEditor" 
 		class="org.springframework.beans.propertyeditors.CustomDateEditor">
 		<constructor-arg>
@@ -29,6 +34,11 @@
 	</bean>
 	
 	<!-- register dateEditor ke tipe data java.util.Date -->
+	<!-- 
+	padanan kode Java : 
+	CustomEditorConfigurer config = new CustomEditorConfigurer();
+	config.getCustomEditors().put("java.util.Date", dateEditor);
+	-->
 	<bean class="org.springframework.beans.factory.config.CustomEditorConfigurer">
 		<property name="customEditors">
 			<map>
