@@ -4,6 +4,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.Date;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import javax.sql.DataSource;
@@ -58,6 +59,13 @@ public class PersonDaoSpring implements PersonDao {
 			return p;
 		}
 		
+	}
+
+	@Override
+	public List<Person> findPersonByNama(String nama) {
+		String sql = "select * from person where nama like ?";
+		return jdbcTemplate
+				.query(sql, new Object[]{"%"+nama+"%"}, new PersonRowMapper());
 	}
 	
 }

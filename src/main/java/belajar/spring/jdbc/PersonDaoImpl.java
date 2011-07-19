@@ -4,6 +4,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.util.Date;
+import java.util.List;
 
 import javax.sql.DataSource;
 
@@ -54,5 +55,11 @@ public class PersonDaoImpl implements PersonDao {
 			err.printStackTrace();
 			return null;
 		}
+	}
+
+	@Override
+	public List<Person> findPersonByNama(String nama) {
+		// TODO Auto-generated method stub
+		return null;
 	}
 }
