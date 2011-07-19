@@ -56,6 +56,9 @@ public class TransactionTest {
 		} catch (Exception err) {
 			// no problem, jalan terus
 		}
+		
+		Thread.sleep(5 * 1000); // sleep 5 detik untuk melihat efek dbcp
+		
 		checkIsiTabel(3); // kalau terjadi rollback, harusnya tetap 3
 	}
 	
