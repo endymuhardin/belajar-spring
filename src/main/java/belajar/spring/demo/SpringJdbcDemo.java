@@ -25,6 +25,7 @@ public class SpringJdbcDemo {
 		p.setTanggalLahir(new Date());
 		
 		personDao.save(p);
+		System.out.println("Id : "+p.getId());
 	}
 
 }
