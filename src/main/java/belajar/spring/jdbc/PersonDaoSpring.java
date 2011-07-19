@@ -44,10 +44,26 @@ public class PersonDaoSpring implements PersonDao {
 	}
 
 	@Override
+	@Transactional(readOnly=true)
 	public Person findPersonById(Integer id) {
 		String sql = "select * from person where id = ?";
 		return jdbcTemplate.queryForObject(sql, new Object[]{id}, 
 				new PersonRowMapper());
+	}
+	
+	@Override
+	@Transactional(readOnly=true)
+	public List<Person> findPersonByNama(String nama) {
+		String sql = "select * from person where nama like ?";
+		return jdbcTemplate
+				.query(sql, new Object[]{"%"+nama+"%"}, new PersonRowMapper());
+	}
+
+	@Override
+	public void save(List<Person> personList) {
+		for (Person person : personList) {
+			save(person);
+		}
 	}
 	
 	private class PersonRowMapper implements RowMapper<Person> {
@@ -62,19 +78,4 @@ public class PersonDaoSpring implements PersonDao {
 		}
 		
 	}
-
-	@Override
-	public List<Person> findPersonByNama(String nama) {
-		String sql = "select * from person where nama like ?";
-		return jdbcTemplate
-				.query(sql, new Object[]{"%"+nama+"%"}, new PersonRowMapper());
-	}
-
-	@Override
-	public void save(List<Person> personList) {
-		for (Person person : personList) {
-			save(person);
-		}
-	}
-	
 }
