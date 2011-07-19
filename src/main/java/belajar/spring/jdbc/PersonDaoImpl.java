@@ -2,6 +2,8 @@ package belajar.spring.jdbc;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.util.Date;
 
 import javax.sql.DataSource;
 
@@ -26,6 +28,31 @@ public class PersonDaoImpl implements PersonDao {
 			conn.close();
 		} catch (Exception err){
 			err.printStackTrace();
+		}
+	}
+
+	@Override
+	public Person findPersonById(Integer id) {
+		try {
+			Connection conn = dataSource.getConnection();
+			
+			String sql = "select * from person where id = ?";
+			PreparedStatement psFind = conn.prepareStatement(sql);
+			psFind.setInt(1, id);
+			
+			ResultSet rs = psFind.executeQuery();
+			if(!rs.next()) return null;
+			
+			Person p = new Person();
+			p.setId(rs.getInt("id"));
+			p.setNama(rs.getString("nama"));
+			p.setTanggalLahir(new Date(rs.getDate("tanggal_lahir").getTime()));
+			
+			conn.close();
+			return p;
+		} catch (Exception err){
+			err.printStackTrace();
+			return null;
 		}
 	}
 }

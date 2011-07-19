@@ -26,6 +26,10 @@ public class SpringJdbcDemo {
 		
 		personDao.save(p);
 		System.out.println("Id : "+p.getId());
+		
+		Person px = personDao.findPersonById(1);
+		System.out.println("Nama : "+px.getNama());
+		System.out.println("Tanggal lahir : "+px.getTanggalLahir());
 	}
 
 }
