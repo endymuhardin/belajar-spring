@@ -14,10 +14,12 @@ import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
 import org.springframework.jdbc.core.simple.SimpleJdbcInsert;
 import org.springframework.stereotype.Repository;
+import org.springframework.transaction.annotation.Transactional;
 
 import belajar.spring.domain.Person;
 
 @Repository("personDaoSpring")
+@Transactional
 public class PersonDaoSpring implements PersonDao {
 
 	private JdbcTemplate jdbcTemplate;
