@@ -8,6 +8,7 @@ import java.util.List;
 
 import javax.sql.DataSource;
 
+import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
@@ -19,6 +20,7 @@ import belajar.spring.domain.Person;
 
 public class TransactionTest {
 	private static PersonDao personDao;
+	private static PersonDao personDaoSpring;
 	private static DataSource dataSource;
 	
 	@BeforeClass
@@ -26,12 +28,12 @@ public class TransactionTest {
 		ApplicationContext ctx = 
 				new ClassPathXmlApplicationContext("classpath:jdbc.xml");
 		personDao = (PersonDao) ctx.getBean("personDao");
+		personDaoSpring = (PersonDao) ctx.getBean("personDaoSpring");
 		dataSource = (DataSource) ctx.getBean("dataSource");
-		
-		resetDatabase();
 	}
 	
-	public static void resetDatabase() throws Exception {
+	@Before
+	public void resetDatabase() throws Exception {
 		Connection conn = dataSource.getConnection();
 		conn.createStatement().executeUpdate("truncate person");
 		conn.close();
@@ -43,6 +45,18 @@ public class TransactionTest {
 		checkIsiTabel(3);
 		personDao.save(sampleDataAbnormal());
 		checkIsiTabel(5); // kalau terjadi rollback, harusnya tetap 3
+	}
+	
+	@Test
+	public void testDeclarativeTransaction() throws Exception {
+		personDaoSpring.save(sampleDataNormal());
+		checkIsiTabel(3);
+		try {
+			personDaoSpring.save(sampleDataAbnormal());
+		} catch (Exception err) {
+			// no problem, jalan terus
+		}
+		checkIsiTabel(3); // kalau terjadi rollback, harusnya tetap 3
 	}
 	
 	private void checkIsiTabel(int numRows) throws Exception {
@@ -82,7 +96,7 @@ public class TransactionTest {
 		p.setTanggalLahir(new Date());
 		hasil.add(p);
 
-		// p2 tidak ada namanya, akan error saat diinsert
+		// p1 tidak ada namanya, akan error saat diinsert
 		Person p1 = new Person();
 		p1.setTanggalLahir(new Date());
 		hasil.add(p1);
