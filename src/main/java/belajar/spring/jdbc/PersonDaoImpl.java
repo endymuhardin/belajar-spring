@@ -6,9 +6,11 @@ import java.sql.PreparedStatement;
 import javax.sql.DataSource;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Repository;
 
 import belajar.spring.domain.Person;
 
+@Repository("personDao")
 public class PersonDaoImpl implements PersonDao {
 	@Autowired private DataSource dataSource;
 	
