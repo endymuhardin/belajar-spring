@@ -18,7 +18,7 @@ public class SpringJdbcDemo {
 				new ClassPathXmlApplicationContext("classpath:jdbc.xml");
 		
 		
-		PersonDao personDao = (PersonDao) ctx.getBean("personDao");
+		PersonDao personDao = (PersonDao) ctx.getBean("personDaoSpring");
 		
 		Person p = new Person();
 		p.setNama("Endy Muhardin");
