@@ -8,6 +8,13 @@
 	<name>Belajar Spring</name>
 	<inceptionYear>2011</inceptionYear>
 
+	<scm>
+		<connection>scm:git:ssh://git@github.com/endymuhardin/belajar-spring.git</connection>
+		<developerConnection>scm:git:ssh://git@github.com/endymuhardin/belajar-spring.git</developerConnection>
+		<tag>HEAD</tag>
+		<url>https://github.com/endymuhardin/belajar-spring.git</url>
+	</scm>
+
 	<!-- Shared version number properties -->
 	<properties>
 		<org.springframework.version>3.0.5.RELEASE</org.springframework.version>
@@ -95,6 +102,8 @@
 		</dependency>
 	</dependencies>
 	<build>
+		<finalName>${project.artifactId}-${project.version}-r${buildNumber}</finalName>
+
 		<plugins>
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
@@ -103,6 +112,23 @@
 				<configuration>
 					<source>1.6</source>
 					<target>1.6</target>
+				</configuration>
+			</plugin>
+			<plugin>
+				<groupId>org.codehaus.mojo</groupId>
+				<artifactId>buildnumber-maven-plugin</artifactId>
+				<version>1.0</version>
+				<executions>
+					<execution>
+						<phase>validate</phase>
+						<goals>
+							<goal>create</goal>
+						</goals>
+					</execution>
+				</executions>
+				<configuration>
+					<doCheck>false</doCheck>
+					<doUpdate>false</doUpdate>
 				</configuration>
 			</plugin>
 		</plugins>
