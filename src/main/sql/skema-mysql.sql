@@ -2,6 +2,6 @@ DROP TABLE IF EXISTS person;
 
 CREATE TABLE person(
 	id INT PRIMARY KEY AUTO_INCREMENT, 
-	nama VARCHAR(100),
+	nama VARCHAR(100) NOT NULL,
 	tanggal_lahir DATE
 ) Engine=InnoDB ;

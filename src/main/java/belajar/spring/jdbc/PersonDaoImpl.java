@@ -62,4 +62,11 @@ public class PersonDaoImpl implements PersonDao {
 		// TODO Auto-generated method stub
 		return null;
 	}
+
+	@Override
+	public void save(List<Person> personList) {
+		for (Person person : personList) {
+			save(person);
+		}
+	}
 }

@@ -67,5 +67,12 @@ public class PersonDaoSpring implements PersonDao {
 		return jdbcTemplate
 				.query(sql, new Object[]{"%"+nama+"%"}, new PersonRowMapper());
 	}
+
+	@Override
+	public void save(List<Person> personList) {
+		for (Person person : personList) {
+			save(person);
+		}
+	}
 	
 }
