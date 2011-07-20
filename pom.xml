@@ -103,14 +103,14 @@
 	</dependencies>
 	<build>
 		<finalName>${project.artifactId}-${project.version}-r${buildNumber}</finalName>
-		
+
 		<resources>
 			<resource>
 				<directory>src/main/resources</directory>
 				<filtering>true</filtering>
 			</resource>
 		</resources>
-		
+
 		<plugins>
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
@@ -137,6 +137,25 @@
 					<doCheck>false</doCheck>
 					<doUpdate>false</doUpdate>
 				</configuration>
+			</plugin>
+			<plugin>
+				<groupId>org.codehaus.groovy.maven</groupId>
+				<artifactId>gmaven-plugin</artifactId>
+				<executions>
+					<execution>
+						<id>groovy-magic</id>
+						<phase>validate</phase>
+						<goals>
+							<goal>execute</goal>
+						</goals>
+						<configuration>
+							<source>
+								def scmversion = 'git describe'.execute().text.trim()
+								project.properties.setProperty('scmVersion',scmversion)
+							</source>
+						</configuration>
+					</execution>
+				</executions>
 			</plugin>
 		</plugins>
 	</build>
