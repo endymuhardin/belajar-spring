@@ -143,8 +143,7 @@
 				<artifactId>gmaven-plugin</artifactId>
 				<executions>
 					<execution>
-						<id>groovy-magic</id>
-						<phase>validate</phase>
+						<phase>generate-resources</phase>
 						<goals>
 							<goal>execute</goal>
 						</goals>
