@@ -9,10 +9,10 @@
 	<inceptionYear>2011</inceptionYear>
 
 	<scm>
-		<connection>scm:git:ssh://git@github.com/endymuhardin/belajar-spring.git</connection>
-		<developerConnection>scm:git:ssh://git@github.com/endymuhardin/belajar-spring.git</developerConnection>
+		<connection>scm:git:git://github.com/endymuhardin/belajar-spring.git</connection>
+		<developerConnection>scm:git:ssh://git@github.com:endymuhardin/belajar-spring.git</developerConnection>
 		<tag>HEAD</tag>
-		<url>https://github.com/endymuhardin/belajar-spring.git</url>
+		<url>https://github.com/endymuhardin/belajar-spring</url>
 	</scm>
 
 	<!-- Shared version number properties -->
