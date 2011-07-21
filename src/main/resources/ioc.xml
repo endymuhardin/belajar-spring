@@ -3,27 +3,24 @@
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://www.springframework.org/schema/beans
 	http://www.springframework.org/schema/beans/spring-beans-3.0.xsd">
-	
+
 	<bean id="endy" class="belajar.spring.domain.Person">
 		<property name="id" value="10"></property>
 		<property name="nama" value="Endy Muhardin"></property>
 		<property name="tanggalLahir" value="1945-08-17"></property>
 		<property name="alamat" ref="bogor"></property>
 	</bean>
-	
+
 	<bean id="bogor" class="belajar.spring.domain.Address">
 		<property name="jalan" value="Jl. Tegar Beriman"></property>
 		<property name="kota" value="Bogor"></property>
 		<property name="kodepos" value="40000"></property>
 	</bean>
-	
+
 	<!-- property editor untuk mengkonversi java.util.Date -->
-	<!-- 
-	padanan kode Java : 
-	CustomDateEditor dateEditor 
-	= new CustomDateEditor(new SimpleDateFormat("yyyy-MM-dd"), true);
-	-->
-	<bean id="dateEditor" 
+	<!-- padanan kode Java : CustomDateEditor dateEditor = new CustomDateEditor(new 
+		SimpleDateFormat("yyyy-MM-dd"), true); -->
+	<bean id="dateEditor"
 		class="org.springframework.beans.propertyeditors.CustomDateEditor">
 		<constructor-arg>
 			<bean class="java.text.SimpleDateFormat">
@@ -32,13 +29,10 @@
 		</constructor-arg>
 		<constructor-arg value="true"></constructor-arg>
 	</bean>
-	
+
 	<!-- register dateEditor ke tipe data java.util.Date -->
-	<!-- 
-	padanan kode Java : 
-	CustomEditorConfigurer config = new CustomEditorConfigurer();
-	config.getCustomEditors().put("java.util.Date", dateEditor);
-	-->
+	<!-- padanan kode Java : CustomEditorConfigurer config = new CustomEditorConfigurer(); 
+		config.getCustomEditors().put("java.util.Date", dateEditor); -->
 	<bean class="org.springframework.beans.factory.config.CustomEditorConfigurer">
 		<property name="customEditors">
 			<map>
@@ -46,5 +40,17 @@
 			</map>
 		</property>
 	</bean>
+
+	<!-- messageSource, untuk mengeluarkan label di aplikasi ke text file, berguna 
+		untuk i18n -->
+	<bean id="messageSource"
+		class="org.springframework.context.support.ResourceBundleMessageSource">
+		<property name="basenames">
+			<list>
+				<value>version</value>
+			</list>
+		</property>
+	</bean>
 	
+
 </beans>
