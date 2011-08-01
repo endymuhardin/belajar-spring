@@ -22,6 +22,9 @@ public class DemoSpring {
 		System.out.println("Nama : "+p.getNama());
 		System.out.println("Tanggal Lahir : "+p.getTanggalLahir());
 		System.out.println("Alamat : "+p.getAlamat().getJalan());
+		for (String email : p.getDaftarEmail()) {
+			System.out.println("Email : "+email);
+		}
 		
 		MessageSource messageSource = (MessageSource) ctx.getBean("messageSource");
 		System.out.println("Versi buildnumber : "+ messageSource.getMessage("app.version", null, "tidak terdefinisi", null));
